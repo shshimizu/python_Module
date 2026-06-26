@@ -1,0 +1,44 @@
+[project]
+name = "integration"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pytest>=9.0.3",
+    "pytest-xdist>=3.8.0",
+]
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.410",
+    "ruff>=0.15.16",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D10",   # undocumented
+    "D203", # conflicts with D211
+    "D213", # conflicts with D212
+    "S603", # subprocess with trusted input
+    "S607", # partial executable path (test environment)
+    "S101", # assert is standard in pytest
+    "FBT001", # bool positional arg (ok in pytest parametrize)
+    "T201" # print
+    "INP001" # _init_.py
+]
+unfixable = [
+    "F401", # unused import
+    "F841", # unused variable
+]
+
+[tool.pyright]
+typeCheckingMode = "standard"
+pythonVersion = "3.12"
